@@ -3,7 +3,7 @@ kafka-docker
 
 [![Docker Automated Build](https://img.shields.io/docker/automated/paddycarey/kafka.svg)](https://hub.docker.com/r/paddycarey/kafka/)
 
-This repository provides a Dockerised Kafka instance (based on Confluent Platform 3.0.1) for development and testing use.
+This repository provides a Dockerised Kafka instance (based on Confluent Platform 3.0.1/Scala 2.11) for development and testing use.
 
 **NOTE:** This image is _NOT_ intended for use in production. Horrible things will probably happen if you attempt to do so.
 
