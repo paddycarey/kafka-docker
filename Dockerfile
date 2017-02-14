@@ -19,4 +19,5 @@ COPY config/kafka/jaas.conf /etc/kafka/jaas.conf
 COPY scripts/start_kafka.sh /usr/local/bin/start_kafka
 
 EXPOSE 9092
+EXPOSE 9193
 CMD ["start_kafka"]
