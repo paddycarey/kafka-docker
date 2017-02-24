@@ -13,10 +13,10 @@ Running Zookeeper and Kafka and configuring them to work together is a pain. Thi
 
 ## Running Kafka
 
-By default Kafka will be accessible on `localhost:9092` and `localhost:9193` so long as the port is exposed at runtime:
+By default Kafka will be accessible on `localhost:9092`, `localhost:9093` and `localhost:9193` so long as the port is exposed at runtime:
 
 ```bash
-$ docker run -ti -p 9092:9092 -p 9193:9193 paddycarey/kafka
+$ docker run -ti -p 9092:9092 -p 9093:9093 -p 9193:9193 paddycarey/kafka
 ```
 
 Kafka comes with a command line client that will take input from a file or from standard input and send it out as messages to the Kafka cluster. By default, each line will be sent as a separate message. You can use this client to test that Kafka is working. Run the producer and then type a few messages into the console to send to the server:
@@ -39,10 +39,10 @@ If you have each of the above commands running in a different terminal then you 
 
 ### Accessing kafka on something other than localhost
 
-This image is configured so that it can be accessed on `localhost:9092` for a PLAIN connection or `localhost:9193` for SSL + SASL. If you need to access Kafka using a different hostname you can set the `KAFKA_ADVERTISED_HOST` environment variable.
+This image is configured so that it can be accessed on `localhost:9092` for a PLAIN connection or `localhost:9093` for a SSL connection or `localhost:9193` for SSL + SASL. If you need to access Kafka using a different hostname you can set the `KAFKA_ADVERTISED_HOST` environment variable.
 
 ```bash
-$ docker run -ti -e "KAFKA_ADVERTISED_HOST=somehostname" -p 9092:9092 -p 9193:9193 paddycarey/kafka
+$ docker run -ti -e "KAFKA_ADVERTISED_HOST=somehostname" -p 9092:9092 -p 9093:9093 -p 9193:9193 paddycarey/kafka
 ```
 
 Or if using Docker compose, your `docker-compose.yml` might look something like:
@@ -52,6 +52,7 @@ kafka:
     image: paddycarey/kafka # or whatever your built
     ports:
         - "9092:9092"
+        - "9093:9093"
         - "9193:9193"
     environment:
       KAFKA_ADVERTISED_HOST: kafka
@@ -68,7 +69,7 @@ consumer:
 This image stores log data in `/var/lib/kafka`. You can use a Docker volume to persist this directory beyond the lifetime of a single container.
 
 ```bash
-$ docker run -ti -v `pwd`/.data/:/var/lib/kafka -p 9092:9092 -p 9193:9193 paddycarey/kafka
+$ docker run -ti -v `pwd`/.data/:/var/lib/kafka -p 9092:9092 -p 9093:9093 -p 9193:9193 paddycarey/kafka
 ```
 
 ## Building the image
